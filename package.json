@@ -1,6 +1,6 @@
 {
   "name": "@juexro/custom-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Based on webpack4, support react and vue for multi pages and single page.",
   "main": "index.js",
   "scripts": {
@@ -14,10 +14,10 @@
     "url": "https://github.com/Juexro/custom-cli"
   },
   "keywords": [
-    "multi-cli",
+    "custom-cli",
     "vue",
     "react",
-    "webpack4",
+    "webpack",
     "configuration"
   ],
   "author": "Mr.Chow",

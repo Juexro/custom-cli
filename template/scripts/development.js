@@ -96,10 +96,12 @@ const compiler = webpack({
     new FriendlyErrorsWebpackPlugin(),
     new webpack.EnvironmentPlugin(appEnvs),
     new webpack.HotModuleReplacementPlugin(),
-    new MyPlugin(),
+    new MyPlugin({
+      appendHeader: `<script>console.log('This is my plugin.')</script>`
+    }),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: resolve('src/index.html'),
+      template: resolve('index.html'),
       filename: 'index.html',
       chunks: ['main'],
       title: 'main'

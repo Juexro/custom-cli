@@ -6,7 +6,7 @@
 
 ``` bash
 # install global
-yarn global add multi-cli
+yarn global add custom-cli
 ```
 
 ``` bash

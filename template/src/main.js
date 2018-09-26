@@ -10,6 +10,5 @@ Vue.config.productionTip = isProduction
 /* eslint-disable no-new */
 new Vue({
   el: '#root',
-  router,
   render: h => h(App)
 })

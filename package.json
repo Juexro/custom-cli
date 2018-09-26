@@ -1,5 +1,5 @@
 {
-  "name": "@juexro/multi-cli",
+  "name": "@juexro/custom-cli",
   "version": "1.0.0",
   "description": "Based on webpack4, support react and vue for multi pages and single page.",
   "main": "index.js",
@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "multi": "./bin/create"
+    "custom": "./bin/create"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Juexro/custom-cli"
   },
   "keywords": [
     "multi-cli",

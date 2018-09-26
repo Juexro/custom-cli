@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>multi-cli</h1>
+  <h1>custom-cli</h1>
   <p>Support multi pages and single page.</p>
 </div>
 <h2 align="center">Usage</h2>

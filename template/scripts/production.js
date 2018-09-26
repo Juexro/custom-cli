@@ -18,6 +18,8 @@ const {
 
 const appEnvs = require('./configs/envs')
 
+const cssLoaders = require('./utils/cssLoaders')
+
 function resolve(name) {
   return path.resolve(__dirname, '..', name)
 }
@@ -106,7 +108,7 @@ const compiler = webpack({
       }
     }),
     new HtmlWebpackPlugin({
-      template: resolve('src/index.html'),
+      template: resolve('index.html'),
       filename: 'index.html',
       chunks: ['main', 'vendors', 'mainifest', 'common'],
       title: 'main',

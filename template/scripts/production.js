@@ -16,7 +16,7 @@ const {
   VueLoaderPlugin
 } = require('vue-loader')
 
-const appEnvs = require('./configs/appEnvs')
+const appEnvs = require('./configs/envs')
 
 function resolve(name) {
   return path.resolve(__dirname, '..', name)

@@ -23,7 +23,6 @@
     "css-loader": "^1.0.0",
     "express": "^4.16.3",
     "file-loader": "^2.0.0",
-    "force-unpublish": "^0.2.4",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^4.0.0-alpha.2",
     "http-proxy-middleware": "^0.19.0",

@@ -17,7 +17,7 @@ const useExpressProxy = require('./plugins/useExpressProxy')
 const MyPlugin = require('./plugins/MyPlugin.js')
 
 const proxyTable = require('./configs/proxy')
-const appEnvs = require('./configs/appEnvs')
+const appEnvs = require('./configs/envs')
 
 const cssLoaders = require('./utils/cssLoaders')
 

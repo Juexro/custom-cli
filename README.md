@@ -11,7 +11,7 @@ yarn global add multi-cli
 
 ``` bash
 # create project
-multi create projectname
+custom create projectname
 ```
 
 ```bash

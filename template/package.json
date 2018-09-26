@@ -8,17 +8,52 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "devDependencies": {
-    {{#lint}}
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.15.0",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.0.0",
-    {{/lint}}
+    "@babel/core": "^7.0.1",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-stage-2": "^7.0.0",
+    "autoprefixer": "^9.1.5",
+    "babel-loader": "^8.0.2",
+    "chalk": "^2.4.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "express": "^4.16.3",
+    "file-loader": "^2.0.0",
+    "force-unpublish": "^0.2.4",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^4.0.0-alpha.2",
+    "http-proxy-middleware": "^0.19.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "node-sass": "^4.9.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "ora": "^3.0.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "sass-resources-loader": "^1.3.3",
+    "style-loader": "^0.23.0",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "url-loader": "^1.1.1",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.18.0",
+    "webpack-bundle-analyzer": "^3.0.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-middleware": "^3.3.0",
+    "webpack-dev-server": "^3.1.8",
+    "webpack-hot-middleware": "^2.23.1",
+    "webpack-merge": "^4.1.4"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "vue": "^2.5.17"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.9.0"
   }
 }

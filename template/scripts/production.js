@@ -1,33 +1,32 @@
 const webpack = require('webpack')
 
 const path = require('path')
-const merge = require('webpack-merge')
 const chalk = require('chalk')
 const ora = require('ora')
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const cleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const analyzer = require('webpack-bundle-analyzer')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const htmlWebpackPlugins = require('./plugins/htmlWebpackPlugins')
 
 const {
   VueLoaderPlugin
 } = require('vue-loader')
 
-const appEnvs = require('./configs/envs')
+const configs = require('./configs')
+const {analyzer} = configs
 
 const cssLoaders = require('./utils/cssLoaders')
+const addHotUpdate = require('./utils/addHotUpdate')
 
 function resolve(name) {
   return path.resolve(__dirname, '..', name)
 }
 
 const compiler = webpack({
-  entry: {
-    main: './src/main.js'
-  },
+  entry: addHotUpdate(configs),
   output: {
     publicPath: '/',
     path: resolve('dist'),
@@ -35,7 +34,7 @@ const compiler = webpack({
     chunkFilename: 'static/js/[name].[chunkhash].js'
   },
   resolve: {
-    modules: [resolve('node_modules'), resolve('src')],
+    modules: [resolve('node_modules'), resolve('pages'), resolve('src')],
     extensions: ['.js', '.vue', '.json']
   },
   module: {
@@ -46,9 +45,7 @@ const compiler = webpack({
           loader: 'vue-loader'
         }]
       },
-      ...cssLoaders({
-        mode: 'production'
-      }),
+      ...cssLoaders(configs),
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -85,7 +82,7 @@ const compiler = webpack({
       }
     ]
   },
-  mode: 'production',
+  mode: configs.mode || 'production',
   performance: {
     hints: false
   },
@@ -94,7 +91,7 @@ const compiler = webpack({
       root: path.resolve(__dirname, '..')
     }),
     new webpack.HashedModuleIdsPlugin(),
-    new webpack.EnvironmentPlugin(appEnvs),
+    new webpack.EnvironmentPlugin(configs.envs),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash].css'
@@ -107,23 +104,11 @@ const compiler = webpack({
         }
       }
     }),
-    new HtmlWebpackPlugin({
-      template: resolve('index.html'),
-      filename: 'index.html',
-      chunks: ['main', 'vendors', 'mainifest', 'common'],
-      title: 'main',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-      }
+    ...htmlWebpackPlugins({
+      ...configs,
+      suffixChunks: ['vendors', 'mainifest', 'common']
     }),
-    // new webpack.SourceMapDevToolPlugin({
-    //   test: /\.js$/,
-    //   filename: 'sourcemap/[name].[chunkhash].map',
-    //   append: false
-    // })
-    new analyzer.BundleAnalyzerPlugin()
+    analyzer && new BundleAnalyzerPlugin()
   ],
   optimization: {
     runtimeChunk: {

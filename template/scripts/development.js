@@ -6,33 +6,30 @@ const path = require('path')
 const express = require('express')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
-
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const {
   VueLoaderPlugin
 } = require('vue-loader')
-const useExpressProxy = require('./plugins/useExpressProxy')
-
-const MyPlugin = require('./plugins/MyPlugin.js')
-
-const proxyTable = require('./configs/proxy')
-const appEnvs = require('./configs/envs')
-
+const useExpressProxy = require('./utils/useExpressProxy')
 const cssLoaders = require('./utils/cssLoaders')
+const addHotUpdate = require('./utils/addHotUpdate')
+
+const MyPlugin = require('./plugins/MyPlugin')
+const htmlWebpackPlugins = require('./plugins/htmlWebpackPlugins')
+
+const configs = require('./configs')
 
 function resolve(name) {
   return path.resolve(__dirname, '..', name)
 }
 
 const app = express()
+const { port = 9000, openBrowser} = configs
 
 console.log(chalk.yellow('The development server is starting......wait me.'))
 
 const compiler = webpack({
-  entry: {
-    main: ['webpack-hot-middleware/client?reload=true&noInfo=true', './src/main.js']
-  },
+  entry: addHotUpdate(configs),
   output: {
     publicPath: '/',
     path: resolve('dist'),
@@ -40,7 +37,7 @@ const compiler = webpack({
     chunkFilename: 'static/js/[name].[chunkhash].js'
   },
   resolve: {
-    modules: [resolve('node_modules'), resolve('src')],
+    modules: [resolve('node_modules'), resolve('pages'), resolve('src')],
     extensions: ['.js', '.vue', '.json']
   },
   module: {
@@ -51,9 +48,7 @@ const compiler = webpack({
           loader: 'vue-loader'
         }]
       },
-      ...cssLoaders({
-        mode: 'development'
-      }),
+      ...cssLoaders(configs),
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -90,22 +85,17 @@ const compiler = webpack({
       }
     ]
   },
-  mode: 'development',
+  mode: configs.mode || 'development',
   devtool: '#cheap-module-eval-source-map',
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
-    new webpack.EnvironmentPlugin(appEnvs),
+    new webpack.EnvironmentPlugin(configs.envs),
     new webpack.HotModuleReplacementPlugin(),
     new MyPlugin({
       appendHeader: `<script>console.log('This is my plugin.')</script>`
     }),
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      template: resolve('index.html'),
-      filename: 'index.html',
-      chunks: ['main'],
-      title: 'main'
-    })
+    ...htmlWebpackPlugins(configs)
   ],
   optimization: {
     noEmitOnErrors: true
@@ -138,10 +128,10 @@ compiler.hooks.compilation.tap('html-webpack-plugin-after-emit', () => {
 app.use(devMiddleware)
 app.use(hotMiddleware)
 
-useExpressProxy(app, proxyTable)
+configs.proxyTable && useExpressProxy(app, configs.proxyTable)
 
 devMiddleware.waitUntilValid(() => {
-  console.log(chalk.yellow(`I am ready. open http://localhost:9000/#/ to see me.`))
+  console.log(chalk.yellow(`I am ready. open http://localhost:${port}/${openBrowser.pageName} to see me.`))
 })
 
-app.listen(9000)
+app.listen(port)

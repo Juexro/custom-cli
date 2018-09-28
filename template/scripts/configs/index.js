@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   envs: require('./envs'),
   entry: {
     pageA: ['pages/pageA/main.js'],

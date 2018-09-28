@@ -1,5 +1,9 @@
 <template>
-  <div class="container">This is a demo.</div>
+  <div class="container">
+    <h1>This is pageA.</h1>
+    <a href="/pageA">pageA</a>
+    <a href="/pageB">pageB</a>
+  </div>
 </template>
 
 <script>

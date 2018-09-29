@@ -6,6 +6,7 @@ class App extends Component {
       <div className={base.container}>
         <h1>This is pageA.</h1>
         <a href="/pageA">pageA</a>
+        <br/>
         <a href="/pageB">pageB</a>
       </div>
     )

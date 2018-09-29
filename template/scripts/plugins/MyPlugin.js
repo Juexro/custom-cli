@@ -1,9 +1,13 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const chalk = require('chalk')
 class MyPlugin {
   constructor (options) {
     this.options = options
   }
   apply (compiler) {
+    compiler.hooks.watchRun.tap('watch-run', (compiler) => {
+      console.log(chalk.yellow('The development server is starting......wait me.'))
+    })
     compiler.hooks.compilation.tap('MyPlugin', (compilation) => {
       HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapPromise(
         'MyPlugin',

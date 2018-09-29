@@ -47,7 +47,7 @@ inquirer.prompt([{
   type: 'list',
   message: 'choose template:',
   name: 'template',
-  choices: ['vue']
+  choices: ['vue', 'react']
 }]).then(answers => {
   console.log()
   downloadAndGenerate(template, answers)

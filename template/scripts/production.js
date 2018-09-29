@@ -11,10 +11,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const htmlWebpackPlugins = require('./plugins/htmlWebpackPlugins')
 
-const {
-  VueLoaderPlugin
-} = require('vue-loader')
-
 let configs = require('./configs')
 configs.mode = 'production'
 
@@ -37,26 +33,15 @@ const compiler = webpack({
   },
   resolve: {
     modules: [resolve('node_modules'), resolve('pages'), resolve('src')],
-    extensions: ['.js', '.vue', '.json']
+    extensions: ['.js', '.jsx', '.json']
   },
   module: {
     rules: [
-      {
-        test: /\.vue$/,
-        use: [{
-          loader: 'vue-loader'
-        }]
-      },
       ...cssLoaders(configs),
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
-      },
-      {
-        test: /vue-human(-\w+)?[\/\\].*\.js$/,
-        loader: 'babel-loader',
-        exclude: /vue-human(-\w+)?[\/\\]node_modules[\/\\].*/
+        include: [resolve('src'), resolve('test'), resolve('pages')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -94,7 +79,6 @@ const compiler = webpack({
     }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.EnvironmentPlugin(configs.envs),
-    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash].css'
     }),

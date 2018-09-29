@@ -7,9 +7,11 @@ const express = require('express')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const OpenBrowserPlugin = require('@juexro/open-browser-webpack-plugin')
 const {
   VueLoaderPlugin
 } = require('vue-loader')
+
 const useExpressProxy = require('./utils/useExpressProxy')
 const cssLoaders = require('./utils/cssLoaders')
 const addHotUpdate = require('./utils/addHotUpdate')
@@ -17,7 +19,8 @@ const addHotUpdate = require('./utils/addHotUpdate')
 const MyPlugin = require('./plugins/MyPlugin')
 const htmlWebpackPlugins = require('./plugins/htmlWebpackPlugins')
 
-const configs = require('./configs')
+let configs = require('./configs')
+configs.mode = 'development'
 
 function resolve(name) {
   return path.resolve(__dirname, '..', name)
@@ -25,8 +28,7 @@ function resolve(name) {
 
 const app = express()
 const { port = 9000, openBrowser} = configs
-
-console.log(chalk.yellow('The development server is starting......wait me.'))
+const openUrl = `http://localhost:${port}/${openBrowser.pageName}`
 
 const compiler = webpack({
   entry: addHotUpdate(configs),
@@ -85,7 +87,7 @@ const compiler = webpack({
       }
     ]
   },
-  mode: configs.mode || 'development',
+  mode: configs.mode,
   devtool: '#cheap-module-eval-source-map',
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
@@ -95,7 +97,10 @@ const compiler = webpack({
       appendHeader: `<script>console.log('This is my plugin.')</script>`
     }),
     new VueLoaderPlugin(),
-    ...htmlWebpackPlugins(configs)
+    ...htmlWebpackPlugins(configs),
+    openBrowser.autoOpen && new OpenBrowserPlugin({
+      url: openUrl
+    })
   ],
   optimization: {
     noEmitOnErrors: true
@@ -131,7 +136,7 @@ app.use(hotMiddleware)
 configs.proxyTable && useExpressProxy(app, configs.proxyTable)
 
 devMiddleware.waitUntilValid(() => {
-  console.log(chalk.yellow(`I am ready. open http://localhost:${port}/${openBrowser.pageName} to see me.`))
+  console.log(chalk.yellow(`I am ready. open ${openUrl} to see me.`))
 })
 
 app.listen(port)

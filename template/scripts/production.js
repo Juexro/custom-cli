@@ -15,7 +15,9 @@ const {
   VueLoaderPlugin
 } = require('vue-loader')
 
-const configs = require('./configs')
+let configs = require('./configs')
+configs.mode = 'production'
+
 const {analyzer} = configs
 
 const cssLoaders = require('./utils/cssLoaders')
@@ -82,7 +84,7 @@ const compiler = webpack({
       }
     ]
   },
-  mode: configs.mode || 'production',
+  mode: configs.mode,
   performance: {
     hints: false
   },

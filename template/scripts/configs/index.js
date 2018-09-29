@@ -1,5 +1,4 @@
 module.exports = {
-  mode: 'development',
   envs: require('./envs'),
   entry: {
     pageA: ['pages/pageA/main.js'],
@@ -17,9 +16,10 @@ module.exports = {
     title: 'pageB'
   }],
   openBrowser: {
-    pageName: 'pageA'
+    pageName: 'pageA',
+    autoOpen: true
   },
   proxyTable: require('./proxy'),
-  port: 9000,
+  port: 9001,
   analyzer: true
 }

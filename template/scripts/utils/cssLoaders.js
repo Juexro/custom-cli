@@ -7,13 +7,17 @@ module.exports = function (options) {
     loader: 'css-loader',
     options: {
       minimize: !!(options.mode === 'production'),
-      sourceMap: options.sourceMap
+      sourceMap: options.sourceMap,
+      modules: true
     }
   }
   var postcssLoader = {
     loader: 'postcss-loader'
   }
 
+  const styleLoader = {
+    loader: 'style-loader'
+  }
   function generateLoaders (loader) {
     var loaders = [cssLoader, postcssLoader]
 
@@ -33,7 +37,7 @@ module.exports = function (options) {
     if (options.extract) {
       return [MiniCssExtractPlugin.loader].concat(loaders)
     } else {
-      return ['vue-style-loader'].concat(loaders)
+      return [styleLoader].concat(loaders)
     }
   }
 

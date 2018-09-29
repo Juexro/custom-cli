@@ -595,9 +595,9 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@juexro/open-browser-webpack-plugin@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@juexro/open-browser-webpack-plugin/-/open-browser-webpack-plugin-1.0.0.tgz#99f7a6b3cae7d658437e73334ad03563c6f57210"
+"@juexro/open-browser-webpack-plugin@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@juexro/open-browser-webpack-plugin/-/open-browser-webpack-plugin-1.0.2.tgz#c4960801d4c325cf584cc1cd464f3bf985a434b4"
   dependencies:
     open "^0.0.5"
 

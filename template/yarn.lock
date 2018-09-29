@@ -595,6 +595,12 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@juexro/open-browser-webpack-plugin@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@juexro/open-browser-webpack-plugin/-/open-browser-webpack-plugin-1.0.0.tgz#99f7a6b3cae7d658437e73334ad03563c6f57210"
+  dependencies:
+    open "^0.0.5"
+
 "@types/tapable@1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
@@ -3992,6 +3998,10 @@ onetime@^2.0.0:
   resolved "https://registry.yarnpkg.com/onetime/-/onetime-2.0.1.tgz#067428230fd67443b2794b22bba528b6867962d4"
   dependencies:
     mimic-fn "^1.0.0"
+
+open@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/open/-/open-0.0.5.tgz#42c3e18ec95466b6bf0dc42f3a2945c3f0cad8fc"
 
 opener@^1.5.1:
   version "1.5.1"

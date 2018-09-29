@@ -12,9 +12,11 @@ yarn global add custom-cli
 ``` bash
 # create project
 custom create projectname
+
+choose template: vue or react
 ```
 
 ```bash
 # install dependencies
-yarn install
+cd projectname && yarn install
 ```

@@ -54,11 +54,6 @@ const compiler = webpack({
         include: [resolve('src'), resolve('test')]
       },
       {
-        test: /vue-human(-\w+)?[\/\\].*\.js$/,
-        loader: 'babel-loader',
-        exclude: /vue-human(-\w+)?[\/\\]node_modules[\/\\].*/
-      },
-      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {

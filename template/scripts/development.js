@@ -8,9 +8,6 @@ const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const OpenBrowserPlugin = require('@juexro/open-browser-webpack-plugin')
-const {
-  VueLoaderPlugin
-} = require('vue-loader')
 
 const useExpressProxy = require('./utils/useExpressProxy')
 const cssLoaders = require('./utils/cssLoaders')
@@ -30,6 +27,8 @@ const app = express()
 const { port = 9000, openBrowser} = configs
 const openUrl = `http://localhost:${port}/${openBrowser.pageName}`
 
+console.log(chalk.yellow('The development server is starting......wait me.'))
+
 const compiler = webpack({
   entry: addHotUpdate(configs),
   output: {
@@ -40,26 +39,15 @@ const compiler = webpack({
   },
   resolve: {
     modules: [resolve('node_modules'), resolve('pages'), resolve('src')],
-    extensions: ['.js', '.vue', '.json']
+    extensions: ['.js', '.jsx', '.json']
   },
   module: {
     rules: [
-      {
-        test: /\.vue$/,
-        use: [{
-          loader: 'vue-loader'
-        }]
-      },
       ...cssLoaders(configs),
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
-      },
-      {
-        test: /vue-human(-\w+)?[\/\\].*\.js$/,
-        loader: 'babel-loader',
-        exclude: /vue-human(-\w+)?[\/\\]node_modules[\/\\].*/
+        include: [resolve('src'), resolve('test'), resolve('pages')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -96,7 +84,6 @@ const compiler = webpack({
     new MyPlugin({
       appendHeader: `<script>console.log('This is my plugin.')</script>`
     }),
-    new VueLoaderPlugin(),
     ...htmlWebpackPlugins(configs),
     openBrowser.autoOpen && new OpenBrowserPlugin({
       url: openUrl

@@ -15,7 +15,7 @@ const {
   VueLoaderPlugin
 } = require('vue-loader')
 
-let configs = require('./configs')
+let configs = require('./config')
 configs.mode = 'production'
 
 const {analyzer} = configs

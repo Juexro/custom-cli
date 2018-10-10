@@ -19,7 +19,7 @@ const addHotUpdate = require('./utils/addHotUpdate')
 const MyPlugin = require('./plugins/MyPlugin')
 const htmlWebpackPlugins = require('./plugins/htmlWebpackPlugins')
 
-let configs = require('./configs')
+let configs = require('./config')
 configs.mode = 'development'
 
 function resolve(name) {

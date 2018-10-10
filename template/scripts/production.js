@@ -11,7 +11,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const htmlWebpackPlugins = require('./plugins/htmlWebpackPlugins')
 
-let configs = require('./configs')
+let configs = require('./config')
 configs.mode = 'production'
 
 const {analyzer} = configs

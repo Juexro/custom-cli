@@ -1,5 +1,7 @@
 module.exports = {
-  envs: require('./envs'),
+  envs: {
+    VERSION: require('../../package.json').version
+  },
   entry: {
     pageA: ['pages/pageA/main.js'],
     pageB: ['pages/pageB/main.js']
@@ -19,7 +21,7 @@ module.exports = {
     pageName: 'pageA',
     autoOpen: true
   },
-  proxyTable: require('./proxy'),
+  proxyTable: {},
   port: 9001,
   analyzer: true
 }

@@ -30,6 +30,8 @@ const app = express()
 const { port = 9000, openBrowser} = configs
 const openUrl = `http://localhost:${port}/${openBrowser.pageName}`
 
+console.log(chalk.yellow('The development server is starting......wait me.'))
+
 const compiler = webpack({
   entry: addHotUpdate(configs),
   output: {

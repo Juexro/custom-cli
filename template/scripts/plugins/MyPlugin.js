@@ -5,9 +5,6 @@ class MyPlugin {
     this.options = options
   }
   apply (compiler) {
-    compiler.hooks.watchRun.tap('watch-run', (compiler) => {
-      console.log(chalk.yellow('The development server is starting......wait me.'))
-    })
     compiler.hooks.compilation.tap('MyPlugin', (compilation) => {
       HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapPromise(
         'MyPlugin',

@@ -1,6 +1,6 @@
 module.exports = {
   envs: {
-    VERSION: require('../../package.json').version
+    VERSION: require('../package.json').version
   },
   entry: {
     pageA: ['pages/pageA/main.js'],
